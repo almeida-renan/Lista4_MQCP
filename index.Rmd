@@ -1,5 +1,6 @@
 ---
 title: "Lista 4"
+subtitle: "Métodos Quantitativos Aplicados à Ciência Política"
 author: "Erlene Avelino, Louise Almeida da Silva, Pedro Luz de Castro, Renan Almeida"  
 output: ioslides_presentation
 ---
@@ -17,7 +18,13 @@ tweets_presidenciaveis <- readr::read_csv("tweets_presidenciaveis.csv")
 
 ## 1. Criando Índice de Interações no Twitter
 
-O Índice de Interações no Twitter (ITT) é composto por três variáveis do conjunto de dados: "retweets", "favorites" e "replies". A variável "favorites" recebeu peso 1, enquanto as variáveis "retweets" e "replies" receberam peso 2. O motivo para isso é o de que as interações retweetar e dar reply pressupõem um nível maior de envolvimento e "esforço" que o simples ato de favoritar uma publicação. 
+Considerando que as redes sociais tem se tornado cada vez mais relevantes para as campanhas eleitorais, como ferramenta de mobilização e busca de visibilidade, bem como, em alguns casos, como meio de comunicação direta entre candidatos e suas audiências, buscaremos aqui comparar as diferenças de interações no Twitter entre os candidatos à presidência das eleições de 2018. Julgamos que a ferramenta permite diferentes níveis de interação, que possivelmente podem estar associados à intensidades de interesse, mobilização e/ou envolvimento por parte dos respondentes às postagens dos presidenciáveis.
+
+## 1. Criando Índice de Interações no Twitter
+
+Neste sentido, construímos o “Índice de Interações no Twitter (ITT)”, composto por três variáveis do conjunto de dados: "retweets", "favorites" e "replies". A variável “retweets”, que corresponde ao compartilhamento da postagem, e “replies”, que compreende as respostas escritas à postagem, receberam peso 2, enquanto a variável “favorites” recebeu peso 1. A princípio, associamos os maiores pesos no índice ao que consideramos requerer um maior "esforço" individual em relação às postagens. A ideia, com isso, é dimensionar estas interações para uma comparação inicial das diferentes relações dos presidenciáveis com suas audiências a partir da ferramenta.
+
+## 1. Criando Índice de Interações no Twitter
 
 Assim, ITT = favorites * 1 + retweets * 2 + replies * 2
 
@@ -31,16 +38,31 @@ tweets_ITT <- tweets_presidenciaveis %>%
 ```
 
 ## 2. Testando a confiabilidade do Índice pelo Alfa de Cronbach
+
+Antes de fazer o cálculo do Alfa de Cronbach para medir a validade do Índice, guardamos a três variáveis utilizadas em um novo objeto
 ```{r, echo=TRUE}
 # Selecionando as variáveis que compõem o índice
 FRR <- tweets_ITT %>%
   select(favorites, retweets, replies)
 
-# Calculando Alfa de Cronbach 
-psych::alpha(FRR)
-
 ```
 
----
-Como visto, o valor do Alfa de Cronbach para o índice com essas 3 variáveis é igual a 0,47, sendo, portanto, inaceitável, por estar abaixo de 0,5.
+## 2. Testando a confiabilidade do Índice pelo Alfa de Cronbach
 
+```{r, echo=TRUE, message=FALSE}
+# Calculando Alfa de Cronbach 
+dados.cronbach <- psych::alpha(FRR)
+```
+
+```{r, echo=TRUE}
+print(dados.cronbach[1])
+```
+
+
+## 2. Testando a confiabilidade do Índice pelo Alfa de Cronbach
+
+- Como visto, o valor do Alfa de Cronbach para o índice com essas 3 variáveis foi igual a 0,47.
+
+- Trata-se de um valor muito baixo, menor do que o valor mínimo recomendado de 0,6.
+
+- O índice criado, portanto, não é confiável do ponto de vista estatístico.

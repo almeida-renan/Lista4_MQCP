@@ -20,7 +20,8 @@
       // Slide settings
       settings: {
                 title: 'Lista 4',
-                        useBuilds: true,
+                        subtitle: 'Métodos Quantitativos Aplicados à Ciência Política',
+                useBuilds: true,
         usePrettify: true,
         enableSlideAreas: true,
         enableTouch: true,
@@ -3188,7 +3189,7 @@ slide:not(.current) .plotly.html-widget{
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
     <hgroup class="auto-fadein">
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
-      
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
       <p data-config-presenter><!-- populated from slide_config.json --></p>
           </hgroup>
   </slide>
@@ -3201,7 +3202,13 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>1. Criando Índice de Interações no Twitter</h2></hgroup><article  id="criando-índice-de-interações-no-twitter">
 
-<p>O Índice de Interações no Twitter (ITT) é composto por três variáveis do conjunto de dados: &ldquo;retweets&rdquo;, &ldquo;favorites&rdquo; e &ldquo;replies&rdquo;. A variável &ldquo;favorites&rdquo; recebeu peso 1, enquanto as variáveis &ldquo;retweets&rdquo; e &ldquo;replies&rdquo; receberam peso 2. O motivo para isso é o de que as interações retweetar e dar reply pressupõem um nível maior de envolvimento e &ldquo;esforço&rdquo; que o simples ato de favoritar uma publicação.</p>
+<p>Considerando que as redes sociais tem se tornado cada vez mais relevantes para as campanhas eleitorais, como ferramenta de mobilização e busca de visibilidade, bem como, em alguns casos, como meio de comunicação direta entre candidatos e suas audiências, buscaremos aqui comparar as diferenças de interações no Twitter entre os candidatos à presidência das eleições de 2018. Julgamos que a ferramenta permite diferentes níveis de interação, que possivelmente podem estar associados à intensidades de interesse, mobilização e/ou envolvimento por parte dos respondentes às postagens dos presidenciáveis.</p>
+
+</article></slide><slide class=""><hgroup><h2>1. Criando Índice de Interações no Twitter</h2></hgroup><article  id="criando-índice-de-interações-no-twitter-1">
+
+<p>Neste sentido, construímos o &ldquo;Índice de Interações no Twitter (ITT)&rdquo;, composto por três variáveis do conjunto de dados: &ldquo;retweets&rdquo;, &ldquo;favorites&rdquo; e &ldquo;replies&rdquo;. A variável &ldquo;retweets&rdquo;, que corresponde ao compartilhamento da postagem, e &ldquo;replies&rdquo;, que compreende as respostas escritas à postagem, receberam peso 2, enquanto a variável &ldquo;favorites&rdquo; recebeu peso 1. A princípio, associamos os maiores pesos no índice ao que consideramos requerer um maior &ldquo;esforço&rdquo; individual em relação às postagens. A ideia, com isso, é dimensionar estas interações para uma comparação inicial das diferentes relações dos presidenciáveis com suas audiências a partir da ferramenta.</p>
+
+</article></slide><slide class=""><hgroup><h2>1. Criando Índice de Interações no Twitter</h2></hgroup><article  id="criando-índice-de-interações-no-twitter-2">
 
 <p>Assim, ITT = favorites * 1 + retweets * 2 + replies * 2</p>
 
@@ -3214,40 +3221,32 @@ tweets_ITT &lt;- tweets_presidenciaveis %&gt;%
 
 </article></slide><slide class=""><hgroup><h2>2. Testando a confiabilidade do Índice pelo Alfa de Cronbach</h2></hgroup><article  id="testando-a-confiabilidade-do-índice-pelo-alfa-de-cronbach">
 
+<p>Antes de fazer o cálculo do Alfa de Cronbach para medir a validade do Índice, guardamos a três variáveis utilizadas em um novo objeto</p>
+
 <pre class = 'prettyprint lang-r'># Selecionando as variáveis que compõem o índice
 FRR &lt;- tweets_ITT %&gt;%
-  select(favorites, retweets, replies)
+  select(favorites, retweets, replies)</pre>
 
-# Calculando Alfa de Cronbach 
-psych::alpha(FRR)</pre>
+</article></slide><slide class=""><hgroup><h2>2. Testando a confiabilidade do Índice pelo Alfa de Cronbach</h2></hgroup><article  id="testando-a-confiabilidade-do-índice-pelo-alfa-de-cronbach-1">
 
-<pre >## Number of categories should be increased  in order to count frequencies.</pre>
+<pre class = 'prettyprint lang-r'># Calculando Alfa de Cronbach 
+dados.cronbach &lt;- psych::alpha(FRR)</pre>
 
-<pre >## 
-## Reliability analysis   
-## Call: psych::alpha(x = FRR)
-## 
-##   raw_alpha std.alpha G6(smc) average_r S/N     ase mean   sd median_r
-##       0.47      0.92    0.91      0.79  11 0.00083 3080 6350     0.75
-## 
-##  lower alpha upper     95% confidence boundaries
-## 0.47 0.47 0.48 
-## 
-##  Reliability if an item is dropped:
-##           raw_alpha std.alpha G6(smc) average_r  S/N alpha se var.r med.r
-## favorites      0.73      0.82    0.69      0.69  4.5  0.00268    NA  0.69
-## retweets       0.24      0.86    0.75      0.75  6.0  0.00124    NA  0.75
-## replies        0.47      0.96    0.93      0.93 27.5  0.00091    NA  0.93
-## 
-##  Item statistics 
-##               n raw.r std.r r.cor r.drop mean    sd
-## favorites 21688  1.00  0.96  0.97   0.94 7419 15470
-## retweets  21688  0.95  0.94  0.94   0.93 1293  2657
-## replies   21688  0.78  0.88  0.76   0.75  527  1409</pre>
+<pre class = 'prettyprint lang-r'>print(dados.cronbach[1])</pre>
 
-</article></slide><slide class=""><hgroup><h2></h2></hgroup><article >
+<pre >## $total
+##  raw_alpha std.alpha   G6(smc) average_r      S/N          ase     mean
+##  0.4735893 0.9196982 0.9128849  0.792431 11.45303 0.0008324301 3079.515
+##        sd  median_r
+##  6350.451 0.7515095</pre>
 
-<p>Como visto, o valor do Alfa de Cronbach para o índice com essas 3 variáveis é igual a 0,47, sendo, portanto, inaceitável, por estar abaixo de 0,5.</p></article></slide>
+</article></slide><slide class=""><hgroup><h2>2. Testando a confiabilidade do Índice pelo Alfa de Cronbach</h2></hgroup><article  id="testando-a-confiabilidade-do-índice-pelo-alfa-de-cronbach-2">
+
+<ul>
+<li><p>Como visto, o valor do Alfa de Cronbach para o índice com essas 3 variáveis foi igual a 0,47.</p></li>
+<li><p>Trata-se de um valor muito baixo, menor do que o valor mínimo recomendado de 0,6.</p></li>
+<li><p>O índice criado, portanto, não é confiável do ponto de vista estatístico.</p></li>
+</ul></article></slide>
 
 
   <slide class="backdrop"></slide>
