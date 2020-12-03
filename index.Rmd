@@ -18,11 +18,11 @@ tweets_presidenciaveis <- readr::read_csv("tweets_presidenciaveis.csv")
 
 ## 1. Criando Índice de Interações no Twitter
 
-Considerando que as redes sociais tem se tornado cada vez mais relevantes para as campanhas eleitorais, como ferramenta de mobilização e busca de visibilidade, bem como, em alguns casos, como meio de comunicação direta entre candidatos e suas audiências, buscaremos aqui comparar as diferenças de interações no Twitter entre os candidatos à presidência das eleições de 2018. Julgamos que a ferramenta permite diferentes níveis de interação, que possivelmente podem estar associados à intensidades de interesse, mobilização e/ou envolvimento por parte dos respondentes às postagens dos presidenciáveis.
+- Considerando que as redes sociais tem se tornado cada vez mais relevantes para as campanhas eleitorais, como ferramenta de mobilização e busca de visibilidade, bem como, em alguns casos, como meio de comunicação direta entre candidatos e suas audiências, buscaremos aqui comparar as diferenças de interações no Twitter entre os candidatos à presidência das eleições de 2018. Julgamos que a ferramenta permite diferentes níveis de interação, que possivelmente podem estar associados à intensidades de interesse, mobilização e/ou envolvimento por parte dos respondentes às postagens dos presidenciáveis.
 
 ## 1. Criando Índice de Interações no Twitter
 
-Neste sentido, construímos o “Índice de Interações no Twitter (ITT)”, composto por três variáveis do conjunto de dados: "retweets", "favorites" e "replies". A variável “retweets”, que corresponde ao compartilhamento da postagem, e “replies”, que compreende as respostas escritas à postagem, receberam peso 2, enquanto a variável “favorites” recebeu peso 1. A princípio, associamos os maiores pesos no índice ao que consideramos requerer um maior "esforço" individual em relação às postagens. A ideia, com isso, é dimensionar estas interações para uma comparação inicial das diferentes relações dos presidenciáveis com suas audiências a partir da ferramenta.
+- Neste sentido, construímos o “Índice de Interações no Twitter (ITT)”, composto por três variáveis do conjunto de dados: "retweets", "favorites" e "replies". A variável “retweets”, que corresponde ao compartilhamento da postagem, e “replies”, que compreende as respostas escritas à postagem, receberam peso 2, enquanto a variável “favorites” recebeu peso 1. A princípio, associamos os maiores pesos no índice ao que consideramos requerer um maior "esforço" individual em relação às postagens. A ideia, com isso, é dimensionar estas interações para uma comparação inicial das diferentes relações dos presidenciáveis com suas audiências a partir da ferramenta.
 
 ## 1. Criando Índice de Interações no Twitter
 
