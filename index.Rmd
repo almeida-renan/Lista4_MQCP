@@ -40,3 +40,6 @@ psych::alpha(FRR)
 
 ```
 
+---
+Como visto, o valor do Alfa de Cronbach para o índice com essas 3 variáveis é igual a 0,47, sendo, portanto, inaceitável, por estar abaixo de 0,5.
+
