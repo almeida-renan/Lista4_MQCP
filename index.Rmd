@@ -1,5 +1,6 @@
 ---
 title: "Lista 4"
+author: "Erlene Avelino, Louise Almeida da Silva, Pedro Luz de Castro, Renan Almeida"  
 output: ioslides_presentation
 ---
 
