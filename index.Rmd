@@ -11,7 +11,8 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Importando o conjunto de dados para o R
 
-O conjunto de dados é constituído por tweets de candidatos à presidência nas eleições de 2018
+- O conjunto de dados é constituído por tweets de alguns candidatos à presidência da República nas eleições de 2018, publicados entre 1 de janeiro de 2018 e 31 de dezembro de 2019.
+
 ```{r, echo=TRUE, message=FALSE}
 tweets_presidenciaveis <- readr::read_csv("tweets_presidenciaveis.csv")
 ```
@@ -26,7 +27,7 @@ tweets_presidenciaveis <- readr::read_csv("tweets_presidenciaveis.csv")
 
 ## 1. Criando Índice de Interações no Twitter
 
-Assim, ITT = favorites * 1 + retweets * 2 + replies * 2
+- Assim, ITT = favorites * 1 + retweets * 2 + replies * 2
 
 ```{r, echo=TRUE, message=FALSE}
 # Carregando tidyverse
@@ -39,7 +40,7 @@ tweets_ITT <- tweets_presidenciaveis %>%
 
 ## 2. Testando a confiabilidade do Índice pelo Alfa de Cronbach
 
-Antes de fazer o cálculo do Alfa de Cronbach para medir a validade do Índice, guardamos as três variáveis utilizadas em um novo objeto
+- Antes de fazer o cálculo do Alfa de Cronbach para medir a validade do Índice, guardamos as três variáveis utilizadas em um novo objeto
 ```{r, echo=TRUE}
 # Selecionando as variáveis que compõem o índice
 FRR <- tweets_ITT %>%
@@ -69,13 +70,15 @@ print(dados.cronbach[1])
 
 ## 3. Medidas-Resumo
 
-- Calculamos duas medidas de posição (média e mediana) dos Índices de Interações no Twitter de cada candidato e criamos um novo objeto com esses valores.
+- Calculamos duas medidas de posição (média e mediana) dos Índices de Interações no Twitter para os tweets de cada candidato e criamos um novo objeto com esses valores.
 
 ```{r, echo=TRUE, warning=FALSE, message=FALSE}
-# Calculando a média e a mediana dos índices de cada candidato
+# Calculando a média e a mediana dos índices para tweets de cada candidato
   Medidas_Resumo <- tweets_ITT %>% 
   group_by(person) %>% 
-  summarise(Media = round(mean(ITT),2), Mediana = round(median(ITT),2))
+  summarise(Media = round(mean(ITT),2), Mediana = round(median(ITT),2)) %>%
+  arrange(desc(Media)) %>%
+  rename(Candidato = person)
 ```
 
 
@@ -85,8 +88,19 @@ print(dados.cronbach[1])
  knitr::kable(Medidas_Resumo)
 ```
 
+----
 
-## 5. Gráficos e números-resumo
+- De acordo com os valores abaixo, podemos constatar que o ITT varia de 0 a 337347.
+
+```{r}
+summary(tweets_ITT$ITT)
+```
+
+- Porém, observando a distância entre a média e a mediana, bem como a distribuição nos quartis, podemos concluir que a maioria dos tweets possui valor de ITT menor que 10000.
+
+- Há um conjunto relativamente pequeno de casos com valor de ITT muito elevado (acima de 10000) que puxa o valor da média para cima.
+
+## 5. Gráficos
 
 - O gráfico a seguir mostra as frequências dos tweets ao longo do tempo (constata-se um maior volume de tweets próximo ao período eleitoral, em outubro de 2018)
 
