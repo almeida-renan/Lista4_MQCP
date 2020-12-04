@@ -124,7 +124,7 @@ ggplot(tweets_ITT, aes(x = date, fill = person)) +
 
 ----
 
-- Também podemos ver observar a evolução dos valores do Índice ao longo do tempo
+- Também podemos observar a evolução dos valores do Índice ao longo do tempo
 
 ```{r}
 ggplot(tweets_ITT, aes(date, ITT)) +
