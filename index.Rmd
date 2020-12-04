@@ -11,18 +11,18 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Importando o conjunto de dados para o R
 
-O conjunto de dados é constituído por tweets de candidatos à presidencia nas eleições de 2018
+O conjunto de dados é constituído por tweets de candidatos à presidência nas eleições de 2018
 ```{r, echo=TRUE, message=FALSE}
 tweets_presidenciaveis <- readr::read_csv("tweets_presidenciaveis.csv")
 ```
 
 ## 1. Criando Índice de Interações no Twitter
 
-- Considerando que as redes sociais tem se tornado cada vez mais relevantes para as campanhas eleitorais, como ferramenta de mobilização e busca de visibilidade, bem como, em alguns casos, como meio de comunicação direta entre candidatos e suas audiências, buscaremos aqui comparar as diferenças de interações no Twitter entre os candidatos à presidência das eleições de 2018. Julgamos que a ferramenta permite diferentes níveis de interação, que possivelmente podem estar associados à intensidades de interesse, mobilização e/ou envolvimento por parte dos respondentes às postagens dos presidenciáveis.
+- Considerando que as redes sociais tem se tornado cada vez mais relevantes para as campanhas eleitorais, como ferramenta de mobilização e busca de visibilidade, bem como, em alguns casos, como meio de comunicação direta entre candidatos e suas audiências, buscaremos aqui comparar as diferenças de interações no Twitter entre os candidatos à presidência das eleições de 2018. Julgamos que a ferramenta permite diferentes níveis de interação, que possivelmente podem estar associados a intensidades de interesse, mobilização e/ou envolvimento por parte dos respondentes às postagens dos presidenciáveis.
 
 ## 1. Criando Índice de Interações no Twitter
 
-- Neste sentido, construímos o “Índice de Interações no Twitter (ITT)”, composto por três variáveis do conjunto de dados: "retweets", "favorites" e "replies". A variável “retweets”, que corresponde ao compartilhamento da postagem, e “replies”, que compreende as respostas escritas à postagem, receberam peso 2, enquanto a variável “favorites” recebeu peso 1. A princípio, associamos os maiores pesos no índice ao que consideramos requerer um maior "esforço" individual em relação às postagens. A ideia, com isso, é dimensionar estas interações para uma comparação inicial das diferentes relações dos presidenciáveis com suas audiências a partir da ferramenta.
+- Neste sentido, construímos o “Índice de Interações no Twitter (ITT)”, composto por três variáveis do conjunto de dados: "retweets", "favorites" e "replies". A variável “retweets”, que corresponde ao compartilhamento da postagem, e “replies”, que compreende as respostas escritas à postagem, receberam peso 2, enquanto a variável “favorites” recebeu peso 1. A princípio, associamos os maiores pesos no índice ao que consideramos requerer um maior "esforço" individual em relação às postagens. A ideia, com isso, é dimensionar essas interações para uma comparação inicial das diferentes relações dos presidenciáveis com suas audiências a partir da ferramenta.
 
 ## 1. Criando Índice de Interações no Twitter
 
@@ -39,7 +39,7 @@ tweets_ITT <- tweets_presidenciaveis %>%
 
 ## 2. Testando a confiabilidade do Índice pelo Alfa de Cronbach
 
-Antes de fazer o cálculo do Alfa de Cronbach para medir a validade do Índice, guardamos a três variáveis utilizadas em um novo objeto
+Antes de fazer o cálculo do Alfa de Cronbach para medir a validade do Índice, guardamos as três variáveis utilizadas em um novo objeto
 ```{r, echo=TRUE}
 # Selecionando as variáveis que compõem o índice
 FRR <- tweets_ITT %>%
@@ -58,7 +58,6 @@ dados.cronbach <- psych::alpha(FRR)
 print(dados.cronbach[1])
 ```
 
-
 ## 2. Testando a confiabilidade do Índice pelo Alfa de Cronbach
 
 - Como visto, o valor do Alfa de Cronbach para o índice com essas 3 variáveis foi igual a 0,47.
@@ -67,7 +66,27 @@ print(dados.cronbach[1])
 
 - O índice criado, portanto, não é confiável do ponto de vista estatístico.
 
-## 3. Gráficos e números-resumo
+
+## 3. Medidas-Resumo
+
+- Calculamos duas medidas de posição (média e mediana) dos Índices de Interações no Twitter de cada candidato e criamos um novo objeto com esses valores.
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+# Calculando a média e a mediana dos índices de cada candidato
+  Medidas_Resumo <- tweets_ITT %>% 
+  group_by(person) %>% 
+  summarise(Media = round(mean(ITT),2), Mediana = round(median(ITT),2))
+```
+
+
+## 4. Tabela
+
+```{r}
+ knitr::kable(Medidas_Resumo)
+```
+
+
+## 5. Gráficos e números-resumo
 
 - O gráfico a seguir mostra as frequências dos tweets ao longo do tempo (constata-se um maior volume de tweets próximo ao período eleitoral, em outubro de 2018)
 
